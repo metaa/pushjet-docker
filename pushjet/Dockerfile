@@ -1,7 +1,12 @@
 FROM alpine:latest
 MAINTAINER Buck Brady <bbrady@mythic.tech>
+ARG VCS_REF
 
-LABEL Description="PushJet Server" Vendor="Mythic Tech" Version="0.1"
+LABEL Description="PushJet Server" \
+      Vendor="Mythic Tech" Version="0.1" \
+      org.label-schema.vcs-ref=$VCS_REF \
+      org.label-schema.vcs-url="https://github.com/adminfromhell/pushjet-docker"
+
 
 # install git so we can get src code & install mysql-client so we can create the database
 # install python
@@ -28,13 +33,13 @@ ENV MYSQL_USER="root" MYSQL_PASS="password" MYSQL_HOST="mysql" \
     PUSHJET_DIR="/srv/http/api.pushjet.io" ZEROMQ_RELAY="ipc:///tmp/pushjet-relay.ipc"
 
 # Copy pushjet config to correct location
-COPY pushjet.config /srv/http/api.pushjet.io/config.py
+COPY pushjet/pushjet.config /srv/http/api.pushjet.io/config.py
 
 # Copy gunicorn config for pushjet
-COPY gunicorn-config /etc/gunicorn.d/pushjet-api
+COPY pushjet/gunicorn-config /etc/gunicorn.d/pushjet-api
 
 # Copy the entrypoint into the build
-COPY pushjet.sh /root/pushjet.sh
+COPY pushjet/pushjet.sh /root/pushjet.sh
 # Make sure it is executable
 RUN chmod +x /root/pushjet.sh
 

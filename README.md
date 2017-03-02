@@ -1,3 +1,5 @@
+#Pushjet Docker
+[![Build Status](https://drone.darkzone.tech/api/badges/adminfromhell/pushjet-docker/status.svg)](https://drone.darkzone.tech/adminfromhell/pushjet-docker)<br/>
 Dockerized image of [PushJet](http://pushjet.io) server
 
 example: docker run --rm -it --name pushjet -p 8000:8000 -e MYSQL_PASS=password -e MYSQL_HOST=mysql --link mysql:mysql adminfromhell/pushjet
