@@ -6,5 +6,7 @@ pipeline:
     email: ${DOCKERHUB_EMAIL}
     repo: adminfromhell/pushjet
     dockerfile: pushjet/Dockerfile
+    build_args:
+      - VCS_REF=`git rev-parse --short HEAD` .
     tags:
       - latest
