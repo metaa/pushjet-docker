@@ -1,0 +1,9 @@
+pipeline:
+  docker:
+    image: plugins/docker
+    username: ${DOCKERHUB_USERNAME}
+    password: ${DOCKERHUB_PASSWORD}
+    email: ${DOCKERHUB_EMAIL}
+    repo: adminfromhell/pushjet
+    tags:
+      - latest
