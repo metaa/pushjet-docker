@@ -1,11 +1,11 @@
 FROM alpine:latest
-MAINTAINER Buck Brady <bbrady@mythic.tech>
+MAINTAINER Metaa <git@metaa.io>
 ARG VCS_REF
 
 LABEL Description="PushJet Server" \
-      Vendor="Mythic Tech" Version="0.1" \
+      Vendor="Metaa" Version="0.1" \
       org.label-schema.vcs-ref=$VCS_REF \
-      org.label-schema.vcs-url="https://github.com/adminfromhell/pushjet-docker"
+      org.label-schema.vcs-url="https://github.com/metaa/pushjet-docker"
 
 
 # install git so we can get src code & install mysql-client so we can create the database
@@ -22,7 +22,7 @@ RUN apk add mariadb-client mariadb-client-libs --no-cache --repository http://dl
     && rm -r /root/.cache \
     && pip install gunicorn \
     && mkdir -p /srv/http && mkdir -p /etc/gunicorn.d \
-    && git clone https://github.com/Pushjet/Pushjet-Server-Api/ /srv/http/api.pushjet.io \
+    && git clone https://github.com/metaa/Pushjet-Server-Api/ /srv/http/api.pushjet.io \
     && pip install -r /srv/http/api.pushjet.io/requirements.txt \
     && apk del --no-cache .build-deps \
     && rm -rf /var/cache/apk/*
